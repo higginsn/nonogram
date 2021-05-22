@@ -10,7 +10,7 @@ import java.util.List;
 public class Solution {
 
     Puzzle puzzle;
-    List<List<Cell>> board;
+    Board board;
 
     public Solution(Puzzle puzzle) {
         this.puzzle = puzzle;
@@ -19,7 +19,7 @@ public class Solution {
         for (int i = 0; i < puzzle.getGridSize(); i++) {
             board.add(Collections.nCopies(puzzle.getGridSize(), Cell.EMPTY));
         }
-        this.board = board;
+        this.board = new Board(board);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class Solution {
 
         for (int i = 0; i < puzzle.getGridSize(); i++) {
             s = s.concat("|");
-            List<Cell> row = board.get(i);
+            List<Cell> row = board.getRowForIndex(i);
             for (Cell cell : row) {
                 s = s.concat(cell.toString());
             }
