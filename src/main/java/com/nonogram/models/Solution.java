@@ -2,8 +2,6 @@ package com.nonogram.models;
 
 import lombok.Value;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Value
@@ -11,16 +9,6 @@ public class Solution {
 
     Puzzle puzzle;
     Board board;
-
-    public Solution(Puzzle puzzle) {
-        this.puzzle = puzzle;
-
-        List<List<Cell>> board = new ArrayList<>();
-        for (int i = 0; i < puzzle.getGridSize(); i++) {
-            board.add(Collections.nCopies(puzzle.getGridSize(), Cell.EMPTY));
-        }
-        this.board = new Board(board);
-    }
 
     @Override
     public String toString() {
