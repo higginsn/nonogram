@@ -6,7 +6,10 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.nonogram.models.Cell.*;
+import static com.nonogram.models.Cell.CLEAR;
+import static com.nonogram.models.Cell.EMPTY;
+import static com.nonogram.models.Cell.FILLED;
+
 
 public class BoardTest {
 

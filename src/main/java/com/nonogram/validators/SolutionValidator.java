@@ -1,6 +1,10 @@
 package com.nonogram.validators;
 
-import com.nonogram.models.*;
+import com.nonogram.models.Board;
+import com.nonogram.models.Cell;
+import com.nonogram.models.Clue;
+import com.nonogram.models.Puzzle;
+import com.nonogram.models.Solution;
 
 import java.util.List;
 import java.util.function.Predicate;
