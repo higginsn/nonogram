@@ -1,6 +1,6 @@
 package com.nonogram.validators;
 
-import com.nonogram.models.Clue;
+import com.nonogram.models.ClueList;
 import com.nonogram.models.Puzzle;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -14,12 +14,12 @@ import java.util.List;
 public class PuzzleValidatorTest {
 
     private static final int GRID_SIZE = 3;
-    private static final Clue INVALID_CLUE_SINGLE_ELEMENT = new Clue(Collections.singletonList(GRID_SIZE + 1));
-    private static final Clue INVALID_CLUE_MANY_ELEMENTS = new Clue(List.of(GRID_SIZE, GRID_SIZE));
-    private static final Clue VALID_CLUE_SINGLE_ELEMENT = new Clue(Collections.singletonList(GRID_SIZE));
-    private static final Clue VALID_CLUE_MANY_ELEMENTS = new Clue(List.of(1, 1));
-    private static final List<Clue> EMPTY_CLUE_LIST = Collections.emptyList();
-    private static final List<Clue> VALID_CLUE_LIST = Collections.nCopies(GRID_SIZE, VALID_CLUE_SINGLE_ELEMENT);
+    private static final ClueList INVALID_CLUE_LIST_SINGLE_ELEMENT = new ClueList(Collections.singletonList(GRID_SIZE + 1));
+    private static final ClueList INVALID_CLUE_LIST_MANY_ELEMENTS = new ClueList(List.of(GRID_SIZE, GRID_SIZE));
+    private static final ClueList VALID_CLUE_LIST_SINGLE_ELEMENT = new ClueList(Collections.singletonList(GRID_SIZE));
+    private static final ClueList VALID_CLUE_LIST_MANY_ELEMENTS = new ClueList(List.of(1, 1));
+    private static final List<ClueList> EMPTY_CLUE_LIST = Collections.emptyList();
+    private static final List<ClueList> VALID_CLUE_LIST = Collections.nCopies(GRID_SIZE, VALID_CLUE_LIST_SINGLE_ELEMENT);
 
     private final PuzzleValidator sut = new PuzzleValidator();
 
@@ -37,7 +37,7 @@ public class PuzzleValidatorTest {
 
     @Test
     public void cluesWithManyElementsExpectValid() {
-        List<Clue> validClueList = Collections.nCopies(GRID_SIZE, VALID_CLUE_MANY_ELEMENTS);
+        List<ClueList> validClueList = Collections.nCopies(GRID_SIZE, VALID_CLUE_LIST_MANY_ELEMENTS);
         Puzzle puzzle = arrangePuzzle(validClueList, validClueList);
         Assertions.assertTrue(sut.test(puzzle));
     }
@@ -56,48 +56,48 @@ public class PuzzleValidatorTest {
 
     @Test
     public void tooManyRowCluesExpectInvalid() {
-        List<Clue> tooManyRowClues = Collections.nCopies(GRID_SIZE + 1, VALID_CLUE_SINGLE_ELEMENT);
-        Puzzle puzzle = arrangePuzzle(tooManyRowClues, VALID_CLUE_LIST);
+        List<ClueList> tooManyRowClueLists = Collections.nCopies(GRID_SIZE + 1, VALID_CLUE_LIST_SINGLE_ELEMENT);
+        Puzzle puzzle = arrangePuzzle(tooManyRowClueLists, VALID_CLUE_LIST);
         Assertions.assertFalse(sut.test(puzzle));
     }
 
     @Test
     public void tooManyColCluesExpectInvalid() {
-        List<Clue> tooManyColClues = Collections.nCopies(GRID_SIZE + 1, VALID_CLUE_SINGLE_ELEMENT);
-        Puzzle puzzle = arrangePuzzle(VALID_CLUE_LIST, tooManyColClues);
+        List<ClueList> tooManyColClueLists = Collections.nCopies(GRID_SIZE + 1, VALID_CLUE_LIST_SINGLE_ELEMENT);
+        Puzzle puzzle = arrangePuzzle(VALID_CLUE_LIST, tooManyColClueLists);
         Assertions.assertFalse(sut.test(puzzle));
     }
 
     @Test
     public void singleLargeRowClueExpectInvalid() {
-        List<Clue> invalidRowClues = Collections.nCopies(GRID_SIZE, INVALID_CLUE_SINGLE_ELEMENT);
-        Puzzle puzzle = arrangePuzzle(invalidRowClues, VALID_CLUE_LIST);
+        List<ClueList> invalidRowClueLists = Collections.nCopies(GRID_SIZE, INVALID_CLUE_LIST_SINGLE_ELEMENT);
+        Puzzle puzzle = arrangePuzzle(invalidRowClueLists, VALID_CLUE_LIST);
         Assertions.assertFalse(sut.test(puzzle));
     }
 
     @Test
     public void singleLargeColClueExpectInvalid() {
-        List<Clue> invalidColClues = Collections.nCopies(GRID_SIZE, INVALID_CLUE_SINGLE_ELEMENT);
-        Puzzle puzzle = arrangePuzzle(VALID_CLUE_LIST, invalidColClues);
+        List<ClueList> invalidColClueLists = Collections.nCopies(GRID_SIZE, INVALID_CLUE_LIST_SINGLE_ELEMENT);
+        Puzzle puzzle = arrangePuzzle(VALID_CLUE_LIST, invalidColClueLists);
         Assertions.assertFalse(sut.test(puzzle));
     }
 
     @Test
     public void singleRowClueWithManyElementsExpectInvalid() {
-        List<Clue> invalidRowClues = Collections.nCopies(GRID_SIZE, INVALID_CLUE_MANY_ELEMENTS);
-        Puzzle puzzle = arrangePuzzle(invalidRowClues, VALID_CLUE_LIST);
+        List<ClueList> invalidRowClueLists = Collections.nCopies(GRID_SIZE, INVALID_CLUE_LIST_MANY_ELEMENTS);
+        Puzzle puzzle = arrangePuzzle(invalidRowClueLists, VALID_CLUE_LIST);
         Assertions.assertFalse(sut.test(puzzle));
     }
 
     @Test
     public void singleColClueWithManyElementsExpectInvalid() {
-        List<Clue> invalidColClues = Collections.nCopies(GRID_SIZE, INVALID_CLUE_MANY_ELEMENTS);
-        Puzzle puzzle = arrangePuzzle(VALID_CLUE_LIST, invalidColClues);
+        List<ClueList> invalidColClueLists = Collections.nCopies(GRID_SIZE, INVALID_CLUE_LIST_MANY_ELEMENTS);
+        Puzzle puzzle = arrangePuzzle(VALID_CLUE_LIST, invalidColClueLists);
         Assertions.assertFalse(sut.test(puzzle));
     }
 
-    private Puzzle arrangePuzzle(List<Clue> rowClues, List<Clue> colClues) {
-        return new Puzzle(rowClues, colClues, GRID_SIZE, false);
+    private Puzzle arrangePuzzle(List<ClueList> rowClueLists, List<ClueList> colClueLists) {
+        return new Puzzle(rowClueLists, colClueLists, GRID_SIZE, false);
     }
 
 }

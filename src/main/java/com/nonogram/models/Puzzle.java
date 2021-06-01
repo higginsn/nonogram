@@ -11,21 +11,21 @@ public class Puzzle {
 
     private static final PuzzleValidator VALIDATOR = new PuzzleValidator();
 
-    List<Clue> colClues;
-    List<Clue> rowClues;
+    List<ClueList> colClueLists;
+    List<ClueList> rowClueLists;
     int gridSize;
 
-    public Puzzle(List<Clue> colClues, List<Clue> rowClues, int gridSize) {
-        this.colClues = colClues;
-        this.rowClues = rowClues;
+    public Puzzle(List<ClueList> colClueLists, List<ClueList> rowClueLists, int gridSize) {
+        this.colClueLists = colClueLists;
+        this.rowClueLists = rowClueLists;
         this.gridSize = gridSize;
         Assertions.assertTrue(VALIDATOR.test(this));
     }
 
     //@VisibleForTesting
-    public Puzzle(List<Clue> colClues, List<Clue> rowClues, int gridSize, boolean assertion) {
-        this.colClues = colClues;
-        this.rowClues = rowClues;
+    public Puzzle(List<ClueList> colClueLists, List<ClueList> rowClueLists, int gridSize, boolean assertion) {
+        this.colClueLists = colClueLists;
+        this.rowClueLists = rowClueLists;
         this.gridSize = gridSize;
     }
 

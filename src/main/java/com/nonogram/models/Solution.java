@@ -14,8 +14,8 @@ public class Solution {
     public String toString() {
         String s = "";
         s = s.concat("\n");
-        for (Clue colClue : puzzle.getColClues()) {
-            s = s.concat(colClue.toString());
+        for (ClueList colClueList : puzzle.getColClueLists()) {
+            s = s.concat(colClueList.toString());
         }
         s = s.concat("\n");
 
@@ -26,8 +26,8 @@ public class Solution {
                 s = s.concat(cell.toString());
             }
             s = s.concat("| ");
-            Clue rowClue = puzzle.getRowClues().get(0);
-            s = s.concat(rowClue.toString());
+            ClueList rowClueList = puzzle.getRowClueLists().get(0);
+            s = s.concat(rowClueList.toString());
             s = s.concat("\n");
         }
         return s;

@@ -1,6 +1,6 @@
 package com.nonogram.validators;
 
-import com.nonogram.models.Clue;
+import com.nonogram.models.ClueList;
 import com.nonogram.models.Puzzle;
 
 import java.util.List;
@@ -11,30 +11,30 @@ public class PuzzleValidator implements Predicate<Puzzle> {
     @Override
     public boolean test(Puzzle puzzle) {
         int gridSize = puzzle.getGridSize();
-        return testClueListSize(puzzle.getColClues(), gridSize) &&
-                testClueListSize(puzzle.getRowClues(), gridSize);
+        return testClueListSize(puzzle.getColClueLists(), gridSize) &&
+                testClueListSize(puzzle.getRowClueLists(), gridSize);
     }
 
-    private boolean testClueListSize(List<Clue> clues, int gridSize) {
-        if (clues.size() != gridSize) {
-            System.out.println("Puzzle dimensions do not match number of clues.");
+    private boolean testClueListSize(List<ClueList> clueLists, int gridSize) {
+        if (clueLists.size() != gridSize) {
+            System.out.println("Puzzle dimensions do not match number of clueLists.");
             return false;
         }
 
-        return testClueListInRange(clues, gridSize);
+        return testClueListInRange(clueLists, gridSize);
     }
 
-    private boolean testClueListInRange(List<Clue> clues, int gridSize) {
-        boolean success = clues.stream().allMatch(clue -> testClueInRange(clue, gridSize));
+    private boolean testClueListInRange(List<ClueList> clueLists, int gridSize) {
+        boolean success = clueLists.stream().allMatch(clue -> testClueInRange(clue, gridSize));
         if (!success) {
             System.out.println("Clue is out of bounds.");
         }
         return success;
     }
 
-    private boolean testClueInRange(Clue clue, int gridSize) {
-        int numberOfEmptySpaces = clue.getClues().size() - 1;
-        int sumOfClues = clue.getClues().stream().mapToInt(x -> x).sum();
+    private boolean testClueInRange(ClueList clueList, int gridSize) {
+        int numberOfEmptySpaces = clueList.getClues().size() - 1;
+        int sumOfClues = clueList.getClues().stream().mapToInt(x -> x).sum();
         return numberOfEmptySpaces + sumOfClues <= gridSize;
     }
 }

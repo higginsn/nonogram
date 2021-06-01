@@ -6,16 +6,16 @@ import org.junit.jupiter.api.Assertions;
 import java.util.List;
 
 /**
- * List of integer clues corresponding to an individual row or column
+ * List of integer clueLists corresponding to an individual row or column
  */
 @Value
-public class Clue {
+public class ClueList {
 
     List<Integer> clues;
 
-    public Clue(List<Integer> clues) {
-        Assertions.assertFalse(clues.isEmpty());
-        this.clues = clues;
+    public ClueList(List<Integer> clueLists) {
+        Assertions.assertFalse(clueLists.isEmpty());
+        this.clues = clueLists;
     }
 
     @Override

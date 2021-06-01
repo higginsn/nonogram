@@ -1,6 +1,6 @@
 package com.nonogram.functional;
 
-import com.nonogram.models.Clue;
+import com.nonogram.models.ClueList;
 import com.nonogram.models.Puzzle;
 import com.nonogram.models.Solution;
 import com.nonogram.solver.Solver;
@@ -20,9 +20,9 @@ public class SolverFunctionalTests {
     @Test
     public void filled3x3() {
         int gridSize = 3;
-        Clue everythingFilledClue = new Clue(List.of(gridSize));
-        List<Clue> clues = Collections.nCopies(gridSize, everythingFilledClue);
-        Puzzle puzzle = new Puzzle(clues, clues, gridSize);
+        ClueList everythingFilledClueList = new ClueList(List.of(gridSize));
+        List<ClueList> clueLists = Collections.nCopies(gridSize, everythingFilledClueList);
+        Puzzle puzzle = new Puzzle(clueLists, clueLists, gridSize);
         solve(puzzle);
     }
 
