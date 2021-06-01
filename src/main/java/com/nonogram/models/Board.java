@@ -1,5 +1,6 @@
 package com.nonogram.models;
 
+import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
@@ -8,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Getter
 @RequiredArgsConstructor
 public final class Board {
 
@@ -27,6 +29,10 @@ public final class Board {
     }
     public void updateCell(int row, int col, Cell element) {
         rowList.get(row).set(col, element);
+    }
+
+    public void updateRow(int index, List<Cell> row) {
+        rowList.set(index, row);
     }
 
     public List<Cell> getRowForIndex(int index) {
